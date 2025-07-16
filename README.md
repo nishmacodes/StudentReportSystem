@@ -39,6 +39,19 @@ This is a beginner-friendly SQL mini project using **SQL Server Management Studi
 
 ---
 
+## 📷 Screenshots
+
+### 📌 Table Design in SSMS
+![Schema](images/schema_design.png)
+
+### 📌 Query Output – Total and Average Marks
+![Output](images/query_output.png)
+
+### 📌 Student Rank Result
+![Rank](images/student_ranks.png)
+
+---
+
 ## 👩‍💻 Author
 
 Created by **Nishma P**  
