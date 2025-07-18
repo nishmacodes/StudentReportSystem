@@ -197,6 +197,8 @@ StudentReportSystem/
 
 ---
 
-✅ **Built With:** SSMS + AdventureWorks Style Schema  
+✅ **Built With:**
+- *SQL Server Management Studio (SSMS)*
+- *AdventureWorks-style Schema (custom simulated structure)*
 ✅ **Level:** Beginner to Intermediate SQL Practice  
 ✅ **Author:** Nishma P
