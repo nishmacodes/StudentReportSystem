@@ -128,7 +128,7 @@ GROUP BY s.Name, s.Class;
 ```
 
 📸 Screenshot:  
-![Class Rank](screenshots/query3_grade_report.png)
+![Class Rank](screenshots/query3_grade_case.png)
 
 ---
 
@@ -178,23 +178,21 @@ HAVING SUM(m.Marks) > (
 
 ```
 StudentReportSystem/
-├── create_tables.sql
-├── insert_data.sql
-├── query1_total_average.sql
-├── query2_class_rank.sql
-├── query4_subject_topper.sql
-├── query5_above_avg.sql
+├── StudentReportSystem.sql
+├── Student_Report_System_Guide.docx
 ├── README.md
 └── screenshots/
+    ├── create_tables_query.png
+    ├── insert_data_query.png
+    ├── marks_table.png
+    ├── query1_total_average.png
+    ├── query2_class_rank.png
+    ├── query3_grade_case.png
+    ├── query4_subject_topper.png
+    ├── query5_above_avg.png
+    ├── schema_design.png
     ├── student_table.png
     ├── subject_table.png
-    ├── marks_table.png
-    ├── create_query.png
-    ├── insert_query.png
-    ├── query1_output.png
-    ├── query2_output.png
-    ├── query4_output.png
-    ├── query5_output.png
 ```
 
 ---
