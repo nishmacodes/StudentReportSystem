@@ -113,11 +113,23 @@ GROUP BY s.Name, s.Class;
 ---
 ## 🏆 Query 3: Student Grade Report
 
-
-
+```sql
+SELECT s.Name, s.Class, AVG(m.Marks) AS AverageMarks,
+  CASE 
+    WHEN AVG(m.Marks) >= 90 THEN 'A+'
+    WHEN AVG(m.Marks) >= 75 THEN 'A'
+    WHEN AVG(m.Marks) >= 60 THEN 'B'
+    WHEN AVG(m.Marks) >= 45 THEN 'C'
+    ELSE 'D'
+  END AS Grade
+FROM Students s
+JOIN Marks m ON s.StudentID = m.StudentID
+GROUP BY s.Name, s.Class;
+```
 
 📸 Screenshot:  
 ![Class Rank](screenshots/query3_grade_report.png)
+
 ---
 
 ## 🥇 Query 4: Top Scorer in Each Subject
