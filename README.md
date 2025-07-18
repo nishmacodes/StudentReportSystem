@@ -180,6 +180,7 @@ HAVING SUM(m.Marks) > (
 StudentReportSystem/
 ├── StudentReportSystem.sql
 ├── Student_Report_System_Guide.docx
+├── LICENCE
 ├── README.md
 └── screenshots/
     ├── create_tables_query.png
@@ -202,3 +203,9 @@ StudentReportSystem/
 - *AdventureWorks-style Schema (custom simulated structure)*
 ✅ **Level:** Beginner to Intermediate SQL Practice  
 ✅ **Author:** Nishma P
+
+---
+
+## 🧾 License
+
+This project is licensed under the [MIT License](LICENSE).
