@@ -22,9 +22,7 @@ This is a mini SQL project built using **SQL Server Management Studio (SSMS)** t
     - MarkID (PK), StudentID (FK), SubjectID (FK), Marks, ExamType
 
 📸 Screenshot:
-![Students Table](screenshots/student_table.png)  
-![Subjects Table](screenshots/subject_table.png)  
-![Marks Table](screenshots/marks_table.png)  
+![Students Table](screenshots/schema_design.png)  
 
 ---
 
