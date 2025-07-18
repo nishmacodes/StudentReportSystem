@@ -54,7 +54,7 @@ CREATE TABLE Marks (
 ```
 
 📸 Screenshot:  
-![Create Tables](screenshots/create_query.png)
+![Create Tables](screenshots/create_tables_query.png)
 
 ---
 
@@ -76,7 +76,7 @@ INSERT INTO Marks VALUES
 ```
 
 📸 Screenshot:  
-![Insert Data](screenshots/insert_query.png)
+![Insert Data](screenshots/insert_data_query.png)
 
 ---
 
@@ -93,7 +93,7 @@ GROUP BY s.StudentID, s.Name, s.Class;
 ```
 
 📸 Screenshot:  
-![Performance Query](screenshots/query1_output.png)
+![Performance Query](screenshots/query1_total_average.png)
 
 ---
 
@@ -108,8 +108,16 @@ GROUP BY s.Name, s.Class;
 ```
 
 📸 Screenshot:  
-![Class Rank](screenshots/query2_output.png)
+![Class Rank](screenshots/query2_class_rank.png)
 
+---
+## 🏆 Query 3: Student Grade Report
+
+
+
+
+📸 Screenshot:  
+![Class Rank](screenshots/query3_grade_report.png)
 ---
 
 ## 🥇 Query 4: Top Scorer in Each Subject
@@ -127,7 +135,7 @@ WHERE RankInSubject = 1;
 ```
 
 📸 Screenshot:  
-![Top Scorer](screenshots/query4_output.png)
+![Top Scorer](screenshots/query4_subject_topper.png)
 
 ---
 
@@ -150,7 +158,7 @@ HAVING SUM(m.Marks) > (
 ```
 
 📸 Screenshot:  
-![Above Avg](screenshots/query5_output.png)
+![Above Avg](screenshots/query5_above_avg.png)
 
 ---
 
