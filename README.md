@@ -1,59 +1,184 @@
-# 🎓 Student Report System
+# 📝 Student Report System (SQL Server Project)
 
-This is a beginner-friendly SQL mini project using **SQL Server Management Studio (SSMS)**. It simulates a real-world system for managing students, subjects, and exam marks — perfect for learning SQL or showcasing in interviews and GitHub portfolios.
+## 📚 Project Overview
 
----
-
-## 📁 Tables Used
-
-- `Students`: Basic student details
-- `Subjects`: List of subjects
-- `Marks`: Marks scored by students per subject and exam type
-
----
-
-## 💡 Features
-
-- View total and average marks per student
-- Rank students within their class using `RANK()`
-- Assign grades using `CASE` expressions
-- Identify subject-wise toppers
-- Use correlated subqueries to find students above class average
+This is a mini SQL project built using **SQL Server Management Studio (SSMS)** that simulates a student report generation system. The project includes:
+- Database design
+- Table creation
+- Data insertion
+- Aggregation, joins, and subqueries
+- Window functions (RANK, etc.)
 
 ---
 
-## 🧰 Technologies
+## 🗃️ Database Schema
 
-- SQL Server
-- T-SQL (Transact-SQL)
-- SSMS (SQL Server Management Studio)
+### Tables Used:
+1. **Students**
+    - StudentID (PK), Name, Gender, Class, DOB
+2. **Subjects**
+    - SubjectID (PK), Name
+3. **Marks**
+    - MarkID (PK), StudentID (FK), SubjectID (FK), Marks, ExamType
 
----
-
-## 🚀 How to Run
-
-1. Open `StudentReportSystem.sql` in SSMS
-2. Execute section-by-section or the entire script
-3. All tables, inserts, and advanced queries are included
-4. Use or modify the queries to build your own reports
-
----
-
-## 📷 Screenshots
-
-### 📌 Table Design in SSMS
-![Schema](images/schema_design.png)
-
-### 📌 Query Output – Total and Average Marks
-![Output](images/query_output.png)
-
-### 📌 Student Rank Result
-![Rank](images/student_ranks.png)
+📸 Screenshot:
+![Students Table](screenshots/student_table.png)  
+![Subjects Table](screenshots/subject_table.png)  
+![Marks Table](screenshots/marks_table.png)  
 
 ---
 
-## 👩‍💻 Author
+## 🧱 Table Creation
 
-Created by **Nishma P**  
-Project Goal: Learn advanced SQL by building a practical use case
+```sql
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Gender CHAR(1),
+    Class VARCHAR(10),
+    DOB DATE
+);
 
+CREATE TABLE Subjects (
+    SubjectID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Marks (
+    MarkID INT PRIMARY KEY,
+    StudentID INT FOREIGN KEY REFERENCES Students(StudentID),
+    SubjectID INT FOREIGN KEY REFERENCES Subjects(SubjectID),
+    Marks INT,
+    ExamType VARCHAR(50)
+);
+```
+
+📸 Screenshot:  
+![Create Tables](screenshots/create_query.png)
+
+---
+
+## 🗳️ Insert Data
+
+```sql
+INSERT INTO Students VALUES
+(1, 'Arjun', 'M', '10A', '2008-04-12'),
+(2, 'Diya', 'F', '10A', '2008-07-19');
+
+INSERT INTO Subjects VALUES
+(101, 'Maths'), (102, 'Science'), (103, 'English');
+
+INSERT INTO Marks VALUES
+(1, 1, 101, 88, 'Final'),
+(2, 1, 102, 72, 'Final'),
+(3, 2, 101, 95, 'Final'),
+(4, 2, 103, 90, 'Final');
+```
+
+📸 Screenshot:  
+![Insert Data](screenshots/insert_query.png)
+
+---
+
+## 🔍 Query 1: Student Total & Average Marks
+
+```sql
+SELECT s.StudentID, s.Name, s.Class,
+       COUNT(m.Marks) AS SubjectCount,
+       SUM(m.Marks) AS TotalMarks,
+       AVG(m.Marks) AS AverageMarks
+FROM Students s
+JOIN Marks m ON s.StudentID = m.StudentID
+GROUP BY s.StudentID, s.Name, s.Class;
+```
+
+📸 Screenshot:  
+![Performance Query](screenshots/query1_output.png)
+
+---
+
+## 🏆 Query 2: Rank Students in Class
+
+```sql
+SELECT s.Name, s.Class, SUM(m.Marks) AS TotalMarks,
+       RANK() OVER (PARTITION BY s.Class ORDER BY SUM(m.Marks) DESC) AS ClassRank
+FROM Students s
+JOIN Marks m ON s.StudentID = m.StudentID
+GROUP BY s.Name, s.Class;
+```
+
+📸 Screenshot:  
+![Class Rank](screenshots/query2_output.png)
+
+---
+
+## 🥇 Query 4: Top Scorer in Each Subject
+
+```sql
+SELECT *
+FROM (
+    SELECT s.Name, sub.Name AS Subject, m.Marks,
+           RANK() OVER (PARTITION BY m.SubjectID ORDER BY m.Marks DESC) AS RankInSubject
+    FROM Marks m
+    JOIN Students s ON m.StudentID = s.StudentID
+    JOIN Subjects sub ON m.SubjectID = sub.SubjectID
+) AS ranked
+WHERE RankInSubject = 1;
+```
+
+📸 Screenshot:  
+![Top Scorer](screenshots/query4_output.png)
+
+---
+
+## 🎯 Query 5: Students Above Class Average
+
+```sql
+SELECT s.Name, s.Class, SUM(m.Marks) AS TotalMarks
+FROM Students s
+JOIN Marks m ON s.StudentID = m.StudentID
+GROUP BY s.Name, s.Class
+HAVING SUM(m.Marks) > (
+    SELECT AVG(Total)
+    FROM (
+        SELECT SUM(m2.Marks) AS Total
+        FROM Students s2
+        JOIN Marks m2 ON s2.StudentID = m2.StudentID
+        GROUP BY s2.StudentID
+    ) AS ClassAvg
+);
+```
+
+📸 Screenshot:  
+![Above Avg](screenshots/query5_output.png)
+
+---
+
+## 📂 Suggested Folder Structure
+
+```
+StudentReportSystem/
+├── create_tables.sql
+├── insert_data.sql
+├── query1_total_average.sql
+├── query2_class_rank.sql
+├── query4_subject_topper.sql
+├── query5_above_avg.sql
+├── README.md
+└── screenshots/
+    ├── student_table.png
+    ├── subject_table.png
+    ├── marks_table.png
+    ├── create_query.png
+    ├── insert_query.png
+    ├── query1_output.png
+    ├── query2_output.png
+    ├── query4_output.png
+    ├── query5_output.png
+```
+
+---
+
+✅ **Built With:** SSMS + AdventureWorks Style Schema  
+✅ **Level:** Beginner to Intermediate SQL Practice  
+✅ **Author:** Nishma P
